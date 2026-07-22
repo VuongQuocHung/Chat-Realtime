@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const chatController = require("../../controllers/client/chat.controller");
+const chatRoutes = require("./chat.route");
 
 router.get("/", (req, res) => res.redirect("/chat"));
-router.get("/chat", chatController.index);
+router.use("/chat", chatRoutes);
 
 module.exports = router;

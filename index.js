@@ -22,29 +22,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes phía client
 app.use("/", clientRoutes);
 
+// Khai báo một biến toàn cục cho file js backend
+global._io = io;
+
 server.listen(port, () => {
   console.log(`Chat app đang chạy tại http://localhost:${port}/chat`);
 });
 
-io.on('connection', (socket) => {
-  console.log('Có một user kết nối!', socket.id);
-
-  socket.on('disconnect', () => {
-    console.log('Có một user đã ngắt kết nối!', socket.id);
-  });
-
-  // socket.on('CLIENT_SEND_MESSAGE', (data) => {
-  //   // io.emit(): trả về data cho các máy a b c
-  //   // ví dụ: tính năng nhắn tin
-  //   io.emit("SERVER_RETURN_MESSAGE", data)
-
-  //   // socket.emit(): trả data về cho máy a (chính là người gửi data lên)
-  //   // 
-  //   // socket.emit("SERVER_RETURN_MESSAGE", data)
-
-  //   // socket.emit(): trả data về cho máy b, c (trả data cho những máy khác, ngoài trừ máy của người gửi lên)
-  //   // ví dụ: tính năng typing (biết ai đang soạn tin nhắn)
-  //   // socket.broadcast.emit("SERVER_RETURN_MESSAGE", data);
-  // });
-
-});
