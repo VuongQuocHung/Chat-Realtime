@@ -1,0 +1,34 @@
+extends ../../../layouts/default.pug
+
+block main
+  .chat-page
+    section.chat
+      .chat__header
+        .chat__avatar EY
+        div
+          h1 Em Yêu
+          p Đang hoạt động
+
+      .chat__body
+        .message.message--incoming
+          .message__name Em Yêu
+          .message__content A ơi sang nhà em nha, nhà em không có ai ở nhà cả.
+
+        .message.message--outgoing
+          .message__content Thế à? Ok em yêu.
+
+        .message.message--incoming
+          .message__name Em Yêu
+          .message__content Nhanh nha nhanh nha.
+
+        .message.message--outgoing
+          .message__content Chị đến rồi mà thấy ai ở nhà đâu em? Khóa cửa mà :(
+
+        .message.message--incoming
+          .message__name Em Yêu
+          .message__content Thì em bảo nhà em không ai ở nhà mà :))
+
+      form.chat__form(action="#" method="post")
+        input(type="text" name="message" placeholder="Nhập nội dung..." autocomplete="off")
+        button(type="button" aria-label="Gửi tin nhắn")
+          span Gửi
