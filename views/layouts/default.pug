@@ -4,10 +4,14 @@ html(lang="vi")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title= pageTitle || "Chat realtime"
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css")
     link(rel="stylesheet" href="/css/style.css")
   body
-    main
+    include ../client/partials/header.pug
+    main.site-main
       block main
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/js/socket.js"></script>
+    script(src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js")
+    script(src="/js/notyf.js")
+    script(src="/js/script.js")
+    block scripts
