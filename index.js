@@ -6,6 +6,11 @@ const clientRoutes = require("./routes/client/index.route");
 const { Server } = require("socket.io");
 const http = require('http');
 
+const { connectDB } = require("./configs/database.config");
+
+// Kết nối DATABASE 
+connectDB();
+
 const app = express();
 const port = process.env.PORT;
 
