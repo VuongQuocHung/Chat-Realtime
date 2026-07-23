@@ -2,7 +2,7 @@ extends ../../../layouts/default.pug
 
 block main
   .chat-page
-    section.chat
+    .chat(my-id=user.id)
       .chat__header
         .chat__avatar CN
         div
@@ -11,7 +11,7 @@ block main
 
       .chat__body
         each chat in chats
-          div(chat=(user.id != chat.userId ? ".message.message--incoming" : ".message.message--outgoing"))
+          div(class=(user.id != chat.userId ? "message message--incoming" : "message message--outgoing"))
             if(user.id != chat.userId)
               .message__name #{chat.fullName}
             .message__content #{chat.content}

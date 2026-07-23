@@ -17,3 +17,33 @@ if(formChat){
   })
 }
 // END CLIENT_SEND_MESAGE
+
+// SERVER_RETURN_MESSAGE
+socket.on("SERVER_RETURN_MESSAGE", (data) => {
+  const body = document.querySelector(".chat__body");
+
+  const myId = document.querySelector(".chat").getAttribute("my-id");
+  const div = document.createElement("div");
+
+  let htmlFullName = "";
+
+  if(myId == data.userId){
+    div.classList.add("message", "message--outgoing");
+  } else {
+    div.classList.add("message", "message--incoming");
+    htmlFullName = `<div class="message__name">${data.fullName}</div>`
+  }
+  div.innerHTML = `
+    ${htmlFullName}
+    <div class="message__content">${data.content}</div>
+  `
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+})
+// END SERVER_RETURN_MESSAGE
+
+// Scroll Chat to Bottom 
+const bodyChat = document.querySelector(".chat .chat__body");
+if(bodyChat){
+  bodyChat.scrollTop = bodyChat.scrollHeight;
+}
