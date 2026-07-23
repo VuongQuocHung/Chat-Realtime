@@ -16,6 +16,8 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = new Server(server);
 
+global._io = io; // tạo biến global để dùng trong các file backend
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 

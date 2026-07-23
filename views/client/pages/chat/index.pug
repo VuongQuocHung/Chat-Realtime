@@ -10,16 +10,15 @@ block main
           p Đang hoạt động
 
       .chat__body
-        .message.message--incoming
-          .message__name ChatNow
-          .message__content Chào #{user.fullName}, chúc bạn có một cuộc trò chuyện vui vẻ!
-
-        .message.message--outgoing
-          .message__content Xin chào mọi người!
+        each chat in chats
+          div(chat=(user.id != chat.userId ? ".message.message--incoming" : ".message.message--outgoing"))
+            if(user.id != chat.userId)
+              .message__name #{chat.fullName}
+            .message__content #{chat.content}
 
       form.chat__form(action="#" method="post")
-        input(type="text" name="message" placeholder="Nhập nội dung..." autocomplete="off")
-        button(type="button" aria-label="Gửi tin nhắn") Gửi
+        input(type="text" name="content" placeholder="Nhập nội dung..." autocomplete="off")
+        button(type="submit" aria-label="Gửi tin nhắn") Gửi
 
 block scripts
   script(src="/socket.io/socket.io.js")
