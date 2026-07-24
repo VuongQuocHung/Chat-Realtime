@@ -14,12 +14,28 @@ block main
           div(class=(user.id != chat.userId ? "message message--incoming" : "message message--outgoing"))
             if(user.id != chat.userId)
               .message__name #{chat.fullName}
-            .message__content #{chat.content}
+            .message__content 
+              | #{chat.content}
+
+        div(class="inner-list-typing")
+          //- div(class="box-typing")
+          //-   div(class="inner-name") Le Van A 
+          //-   div(class="inner-dots")
+          //-     span 
+          //-     span 
+          //-     span
+
+          //- div(class="box-typing")
+          //-   div(class="inner-name") Le Van B 
+          //-   div(class="inner-dots")
+          //-     span 
+          //-     span 
+          //-     span
 
       form.chat__form(action="#" method="post")
         input(type="text" name="content" placeholder="Nhập nội dung..." autocomplete="off")
         span(class="button-icon") <i class="fa-regular fa-face-smile"></i>
-        button(type="submit" aria-label="Gửi tin nhắn") Gửi
+        button(type="submit" aria-label="Gửi tin nhắn") <i class="fa-regular fa-paper-plane"></i>
 
       div(class='tooltip' role='tooltip')
         emoji-picker(class='light')

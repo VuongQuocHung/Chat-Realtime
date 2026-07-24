@@ -2,7 +2,6 @@ const Chat = require("../../models/chat.model");
 const User = require("../../models/user.model");
 
 module.exports.index = async (req, res) => {
-
   _io.once("connection", (socket) => {
     // Người dùng gửi tin nhắn lên server
     socket.on("CLIENT_SEND_MESAGE", async (data) => {
@@ -20,6 +19,15 @@ module.exports.index = async (req, res) => {
         userId: res.locals.user.id,
         fullName: res.locals.user.fullName,
         content: data.content
+      })
+    })
+
+    // CLIENT_SEND_TYPING
+    socket.on("CLIENT_SEND_TYPING", (type) => {
+      socket.broadcast.emit("SERVER_RETURN_TYPING", {
+        userId: res.locals.user.id,
+        fullName: res.locals.user.fullName,
+        type: type
       })
     })
   })
