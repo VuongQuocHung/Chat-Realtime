@@ -18,8 +18,8 @@ block main
 
       form.chat__form(action="#" method="post")
         input(type="text" name="content" placeholder="Nhập nội dung..." autocomplete="off")
+        span(class="button-icon") <i class="fa-regular fa-face-smile"></i>
         button(type="submit" aria-label="Gửi tin nhắn") Gửi
 
-block scripts
-  script(src="/socket.io/socket.io.js")
-  script(src="/js/socket.js")
+      div(class='tooltip' role='tooltip')
+        emoji-picker(class='light')

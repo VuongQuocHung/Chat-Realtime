@@ -322,6 +322,7 @@ a {
 }
 .chat__form {
   display: flex;
+  align-items: center;
   gap: 8px;
   padding: 14px 16px;
   border-top: 1px solid #ececf2;
@@ -349,6 +350,18 @@ a {
   font: inherit;
   font-weight: 600;
 }
+
+.chat__form .button-icon {
+  display: grid;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  color: #1f2937;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  place-items: center;
+}
 @media (max-width: 700px) {
   .site-header__inner {
     gap: 15px;
@@ -373,6 +386,15 @@ a {
   .hero__actions {
     justify-content: center;
   }
+}
+
+/* tooltip */
+.tooltip {
+  display: none
+}
+.tooltip.show{
+  display: block;
+
 }
 @media (max-width: 480px) {
   .site-header__inner {

@@ -38,7 +38,6 @@ module.exports.index = async (req, res) => {
 
   }
 
-  console.log(chats);
   res.render("client/pages/chat/index", {
     pageTitle: "Chat realtime",
     chats: chats
