@@ -1,15 +1,15 @@
-header.site-header
-  .site-header__inner
-    a.site-logo(href="/") ChatNow
-    nav.site-nav(aria-label="Điều hướng chính")
+header.header
+  .inner-main
+    a.inner-logo(href="/") ChatNow
+    nav.inner-menu(aria-label="Điều hướng chính")
       a(href="/") Trang chủ
       if user
         a(href="/chat") Chat
-    .site-header__actions
+    .inner-actions
       if user
-        span.site-user Xin chào, #{user.fullName}
+        span.inner-user Xin chào, #{user.fullName}
         form#logout-form(action="/user/logout" method="post")
-          button.button.button--ghost(type="submit") Đăng xuất
+          button.button.ghost(type="submit") Đăng xuất
       else
-        a.button.button--ghost(href="/user/login") Đăng nhập
+        a.button.ghost(href="/user/login") Đăng nhập
         a.button(href="/user/register") Đăng ký

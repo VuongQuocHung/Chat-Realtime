@@ -7,13 +7,15 @@ html(lang="vi")
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css")
     link(rel="stylesheet" href="/css/style.css")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/file-upload-with-preview/6.1.2/style.min.css")
   body
     include ../client/partials/header.pug
     main.site-main
       block main
 
     script(src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js")
-    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/file-upload-with-preview/6.1.2/index.iife.min.js") 
+    script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
     script(src="/js/notyf.js")
     script(src="/js/script.js")
     script(src="/socket.io/socket.io.js")

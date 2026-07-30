@@ -1,11 +1,11 @@
 extends ../../../layouts/default.pug
 
 block main
-  section.auth-page
-    .auth-card
+  section.auth
+    .inner-box
       h1 Đăng nhập
-      p.auth-card__description Chào mừng bạn quay lại với ChatNow.
-      form.auth-form#login-form
+      p.inner-description Chào mừng bạn quay lại với ChatNow.
+      form.inner-form#login-form
         label(for="email") Email
         input#email(type="email" name="email" placeholder="name@example.com" autocomplete="email" required)
         label(for="password") Mật khẩu
@@ -13,5 +13,5 @@ block main
         label.check-label(for="rememberPassword")
           input#rememberPassword(type="checkbox" name="rememberPassword")
           span Ghi nhớ đăng nhập trong 7 ngày
-        button.button.button--full(type="submit") Đăng nhập
-      p.auth-card__footer Chưa có tài khoản? #[a(href="/user/register") Đăng ký ngay]
+        button.button.full(type="submit") Đăng nhập
+      p.inner-footer Chưa có tài khoản? #[a(href="/user/register") Đăng ký ngay]

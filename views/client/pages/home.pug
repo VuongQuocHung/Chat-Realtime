@@ -2,19 +2,19 @@ extends ../../layouts/default.pug
 
 block main
   section.hero
-    .hero__content
-      p.hero__eyebrow CHAT REALTIME
+    .inner-content
+      p.inner-eyebrow CHAT REALTIME
       h1 Trò chuyện đơn giản, kết nối nhanh chóng.
-      p.hero__description Đăng ký một tài khoản để bắt đầu nhắn tin trong không gian chat riêng của bạn.
-      .hero__actions
+      p.inner-description Đăng ký một tài khoản để bắt đầu nhắn tin trong không gian chat riêng của bạn.
+      .inner-actions
         if user
-          a.button.button--large(href="/chat") Vào chat
+          a.button.large(href="/chat") Vào chat
         else
-          a.button.button--large(href="/user/register") Tạo tài khoản
-          a.button.button--ghost.button--large(href="/user/login") Đăng nhập
-    .hero__card
-      .hero__card-dot
-      .hero__card-message
+          a.button.large(href="/user/register") Tạo tài khoản
+          a.button.ghost.large(href="/user/login") Đăng nhập
+    .inner-card
+      .inner-dot
+      .inner-message
         strong ChatNow
         span Sẵn sàng trò chuyện
       p Mọi cuộc trò chuyện đều bắt đầu bằng một lời chào.

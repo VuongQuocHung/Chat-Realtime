@@ -3,18 +3,27 @@ import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm
 var socket = io();
 
 // CLIENT_SEND_MESAGE
-const formChat = document.querySelector(".chat .chat__form");
+const formChat = document.querySelector(".chat .inner-form");
 if(formChat){
+  const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-images', {
+    multiple: true,
+    maxFileCount: 6
+  });
+
   formChat.addEventListener("submit", (event) => {
     event.preventDefault();
-    
+
     const content = formChat.content.value;
-    if(content){
+    const images = upload.cachedFileArray || [];
+
+    if(content || images.length > 0){
       const data = {
-        content: content
+        content: content,
+        images: images
       }
       socket.emit("CLIENT_SEND_MESAGE", data);
       formChat.content.value = "";
+
     }
   })
 }
@@ -22,7 +31,7 @@ if(formChat){
 
 // SERVER_RETURN_MESSAGE
 socket.on("SERVER_RETURN_MESSAGE", (data) => {
-  const body = document.querySelector(".chat__body");
+  const body = document.querySelector(".chat .inner-body");
 
   const myId = document.querySelector(".chat").getAttribute("my-id");
   const div = document.createElement("div");
@@ -30,15 +39,38 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
   let htmlFullName = "";
 
   if(myId == data.userId){
-    div.classList.add("message", "message--outgoing");
+    div.classList.add("inner-message", "inner-outgoing");
   } else {
-    div.classList.add("message", "message--incoming");
-    htmlFullName = `<div class="message__name">${data.fullName}</div>`
+    div.classList.add("inner-message", "inner-incoming");
+    htmlFullName = `<div class="inner-name">${data.fullName}</div>`
   }
-  div.innerHTML = `
-    ${htmlFullName}
-    <div class="message__content">${data.content}</div>
+
+  let htmlContent = "";
+
+  if(data.content) {
+    htmlContent = `
+      <div class="inner-content">${data.content}</div>
+    `;
+  }
+
+  let htmlImages = "";
+
+  if(data.images.length > 0) {
+    htmlImages += `<div class="inner-images">`;
+
+    for (const image of data.images) {
+      htmlImages += `<img src="${image}" />`;
+    }
+
+    htmlImages += `</div>`;
+  }
+
+  div.innerHTML =
   `
+    ${htmlContent}
+    ${htmlImages}
+  `
+
 
   const elementListTyping = document.querySelector(".chat .inner-list-typing");
 
@@ -50,23 +82,23 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
 })
 // END SERVER_RETURN_MESSAGE
 
-// Scroll Chat to Bottom 
-const bodyChat = document.querySelector(".chat .chat__body");
+// Scroll Chat to Bottom
+const bodyChat = document.querySelector(".chat .inner-body");
 if(bodyChat){
   bodyChat.scrollTop = bodyChat.scrollHeight;
 }
 
-// Show Icon 
+// Show Icon
 const emojiPicker = document.querySelector("emoji-picker");
 if(emojiPicker){
-  const inputChat = document.querySelector(".chat .chat__form input[name='content']");
+  const inputChat = document.querySelector(".chat .inner-form input[name='content']");
 
-  const buttonIcon = document.querySelector(".chat .chat__form .button-icon");
+  const buttonIcon = document.querySelector(".chat .inner-form .inner-button-icon");
   const tooltip = document.querySelector(".chat .tooltip");
   Popper.createPopper(buttonIcon, tooltip);
 
   buttonIcon.addEventListener("click", () => {
-    tooltip.classList.toggle('show');
+    tooltip.classList.toggle('shown');
   })
 
 
@@ -100,14 +132,16 @@ if(elementListTyping){
         boxTyping.setAttribute("user-id", data.userId);
         boxTyping.innerHTML=`
           <div class="inner-name"> ${data.fullName} </div>
-          <div class="inner-dots"> 
-            <span></span> 
-            <span></span> 
+          <div class="inner-dots">
+            <span></span>
+            <span></span>
             <span></span>
           </div>
         `
         elementListTyping.appendChild(boxTyping);
-      } 
+
+        bodyChat.scrollTop = bodyChat.scrollHeight;
+      }
     } else {
       const existBoxTyping = elementListTyping.querySelector(`.box-typing[user-id="${data.userId}"]`);
       if(existBoxTyping){
